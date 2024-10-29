@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高校入試コース - 病みサースクール</title>
+    <style>
+        :root {
+            --primary-color: #00a86b;
+            --secondary-color: #7cfc00;
+            --accent-color: #ff1493;
+            --background-color: #f0fff0;
+            --text-color: #006400;
+            --light-text-color: #ffffff;
+        }
+        body, html {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+        nav {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text-color);
+            padding: 1em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul li a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        .content-wrapper {
+            padding-top: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+        .course-header {
+            background: linear-gradient(135deg, #e6ffe6, #ccffcc);
+            padding: 3em;
+            border-radius: 15px;
+            margin-bottom: 2em;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .course-header h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            position: relative;
+            z-index: 1;
+        }
+        .course-header::after {
+            content: '★';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 100px;
+            color: rgba(255,255,255,0.2);
+            transform: rotate(30deg);
+        }
+        .target-section {
+            background: white;
+            padding: 2em;
+            border-radius: 10px;
+            margin-bottom: 2em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .target-badge {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5em 1em;
+            border-radius: 20px;
+            margin: 0.5em;
+            font-weight: bold;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2em;
+            margin: 2em 0;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff, #f8f8f8);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-card h3 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+        .learning-process {
+            background: linear-gradient(135deg, #f0fff0, #e6ffe6);
+            padding: 2em;
+            border-radius: 10px;
+            margin: 2em 0;
+        }
+        .process-card {
+            background: white;
+            padding: 1.5em;
+            border-radius: 8px;
+            margin: 1em 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 1em;
+        }
+        .process-number {
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .expected-results {
+            background: white;
+            padding: 2em;
+            border-radius: 10px;
+            margin-top: 2em;
+        }
+        .results-list {
+            list-style: none;
+            padding: 0;
+        }
+        .results-list li {
+            padding: 1em;
+            margin: 1em 0;
+            background: linear-gradient(135deg, #f0fff0, #e6ffe6);
+            border-radius: 8px;
+            position: relative;
+            padding-left: 2.5em;
+            transition: transform 0.3s ease;
+        }
+        .results-list li:hover {
+            transform: translateX(10px);
+        }
+        .results-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 1em;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .emphasis {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        .contact-section {
+            text-align: center;
+            margin-top: 3em;
+            padding: 2em;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 10px;
+        }
+        .contact-button {
+            display: inline-block;
+            padding: 1em 2em;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1em;
+            transition: all 0.3s ease;
+        }
+        .contact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        /* target-section 関連のスタイルを統一 */
+        .target-section .target-list {
+            display: flex;
+            gap: 1em;
+            flex-wrap: wrap;
+            margin: 1em 0;
+        }
+        .target-section .target-item {
+            background: linear-gradient(135deg, #f0fff0, #e6ffe6);
+            padding: 0.5em 1em;
+            border-radius: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">病みサースクール</a></li>
+            <li><a href="#">合格実績</a></li>
+            <li><a href="hogosyanokatahe.html">保護者の方へ</a></li>
+            <li><a href="#">ボランティア募集</a></li>
+        </ul>
+    </nav>
+
+    <div class="content-wrapper">
+        <div class="course-header">
+            <h1>高校入試コース</h1>
+            <p class="emphasis">一人ひとりの目標に合わせた、きめ細やかな受験対策</p>
+        </div>
+
+        <div class="target-section">
+            <h2>対象者</h2>
+            <div class="target-list">
+                <span class="target-badge">中学生</span>
+                <span class="target-badge">高校受験を目指す方</span>
+            </div>
+            <h2>目的</h2>
+            <p>志望校合格に向けて、基礎学力の強化から応用力の育成まで、受験に必要なスキルをバランスよく習得します。<span class="emphasis">個別指導</span>を通じて、一人ひとりのペースに合わせた学習計画を提供し、効率的な受験対策を行います。</p>
+        </div>
+        
+        <h2>コースの特長</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>基礎学力の徹底強化</h3>
+                <p>各科目の基礎をしっかりと固めることで、応用問題への対応力を高めます。わからない部分をそのままにしないための徹底したフォローアップも実施します。</p>
+            </div>
+            <div class="feature-card">
+                <h3>志望校別の個別対策</h3>
+                <p>志望校ごとの入試傾向に合わせた学習プランを作成し、頻出問題や特定分野を重点的に指導します。過去問演習を通じて、試験本番への準備を万全に整えます。</p>
+            </div>
+            <div class="feature-card">
+                <h3>模擬試験とフィードバック</h3>
+                <p>模擬試験を定期的に実施し、試験慣れを促進します。結果に基づいてフィードバックを行い、苦手分野の強化や学習計画の調整を行います。</p>
+            </div>
+            <div class="feature-card">
+                <h3>モチベーションを維持するコーチング</h3>
+                <p>受験までの長期間を乗り切るため、定期的にコーチングセッションを行います。学習への不安を取り除き、目標達成に向けたメンタルサポートを提供します。</p>
+            </div>
+        </div>
+
+        <div class="learning-process">
+            <h2>学習の進め方</h2>
+            <div class="process-card">
+                <div class="process-number">1</div>
+                <div>
+                    <h3>受講前のカウンセリングで学習プランを作成</h3>
+                    <p>生徒の学力や志望校を把握し、それに基づいた個別の学習プランを提供します。</p>
+                </div>
+            </div>
+            <div class="process-card">
+                <div class="process-number">2</div>
+                <div>
+                    <h3>毎月の進捗確認と学習計画の調整</h3>
+                    <p>定期的に学習進捗を確認し、必要に応じて計画を調整します。得意分野を伸ばしながら、苦手分野の克服も並行して進めます。</p>
+                </div>
+            </div>
+            <div class="process-card">
+                <div class="process-number">3</div>
+                <div>
+                    <h3>過去問演習と模擬試験</h3>
+                    <p>志望校の過去問を解くことで、出題傾向を把握し、弱点を強化します。模擬試験を通じて、試験本番への準備を整えます。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="expected-results">
+            <h2>期待される成果</h2>
+            <ul class="results-list">
+                <li>志望校合格に向けた学力と自信を養います。</li>
+                <li>苦手を克服し、得意科目をさらに伸ばします。</li>
+                <li>受験を通じて、自分自身の成長を実感し、高校生活のスタートを力強く切る準備を整えます。</li>
+            </ul>
+        </div>
+
+        <div class="contact-section">
+            <h2>まずは無料カウンセリングから</h2>
+            <p>個別の学習プランについて、詳しくご説明させていただきます。</p>
+            <a href="#" class="contact-button">カウンセリングのお申し込み</a>
+        </div>
+    </div>
+</body>
+</html>

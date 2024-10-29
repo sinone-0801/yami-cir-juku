@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>病みサー塾 ホームページ</title>
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: white;
+            color: #333;
+        }
+        nav {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .content-wrapper {
+            padding-top: 60px;
+            height: calc(100% - 60px);
+            overflow-y: auto;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1em;
+        }
+        .main-image {
+            width: 100%;
+            margin-bottom: 1em;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .main-image.visible {
+            opacity: 1;
+        }
+        .main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .catchphrase {
+            width: 100%;
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 1em;
+            color: #4CAF50;
+        }
+        .content-area {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .main-content {
+            flex: 3;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1em;
+        }
+        .main-content a {
+            background-color: #E8F5E9;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .main-content a:hover {
+            background-color: #C8E6C9;
+        }
+        .main-content img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .news-feed {
+            flex: 1;
+            background-color: #E8F5E9;
+            padding: 1em;
+            margin-left: 1em;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">ホーム</a></li>
+            <li><a href="#">サービス</a></li>
+            <li><a href="#">会社情報</a></li>
+            <li><a href="#">お問い合わせ</a></li>
+        </ul>
+    </nav>
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="main-image">
+                <img src="images/main.png" alt="メイン画像">
+            </div>
+            <div class="catchphrase">病みサー塾は、塾生の居場所作りと、成長を支援します！</div>
+            <div class="content-area">
+                <div class="main-content">
+                    <a href="https://www.youtube.com/channel/UCTgCO_hGCy6yjTw0YvohU-w">
+                        <img src="images/youtube_logo.png" alt="YouTube">
+                    </a>
+                    <a href="#">塾長挨拶</a>
+                    <a href="#">講師紹介</a>
+                    <a href="#">塾生の声</a>
+                    <a href="#">ギャラリー</a>
+                    <a href="https://yamiserver.com/">病みサー (本家)</a>
+                </div>
+                <div class="news-feed">
+                    <h2>ニュース</h2>
+                    <ul>
+                        <li>ニュース項目1</li>
+                        <li>ニュース項目2</li>
+                        <li>ニュース項目3</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var mainImage = document.querySelector('.main-image');
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        mainImage.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            observer.observe(mainImage);
+        });
+    </script>
+</body>
+</html>

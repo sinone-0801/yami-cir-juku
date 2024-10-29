@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保護者の方へ - 病みサースクール</title>
+    <style>
+        :root {
+            --primary-color: #00a86b;
+            --secondary-color: #7cfc00;
+            --accent-color: #ff1493;
+            --background-color: #f0fff0;
+            --text-color: #006400;
+            --light-text-color: #ffffff;
+        }
+        body, html {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+        nav {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text-color);
+            padding: 1em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul li a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        .content-wrapper {
+            padding-top: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+        .main-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,168,107,0.2);
+        }
+        .header-message {
+            text-align: center;
+            margin-bottom: 3em;
+            padding: 2em;
+            background: linear-gradient(135deg, #e6ffe6, #ccffcc);
+            border-radius: 10px;
+        }
+        .header-message h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        .principal-message {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 1em;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2em;
+            margin: 3em 0;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
+            padding: 1.5em;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-card h3 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
+        }
+        .support-section {
+            background: linear-gradient(135deg, #f0fff0, #e6ffe6);
+            padding: 2em;
+            border-radius: 10px;
+            margin: 3em 0;
+        }
+        .support-section h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1.5em;
+        }
+        .support-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2em;
+        }
+        .support-item {
+            background: white;
+            padding: 1.5em;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .final-message {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2em;
+            border-radius: 10px;
+            margin-top: 3em;
+            text-align: center;
+        }
+        .final-message h2 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            color: white;
+        }
+        .contact-button {
+            display: inline-block;
+            padding: 1em 2em;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 2em;
+            transition: all 0.3s ease;
+        }
+        .contact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .emphasis {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">病みサースクール</a></li>
+            <li><a href="#">合格実績</a></li>
+            <li><a href="hogosyanokatahe.html">保護者の方へ</a></li>
+            <li><a href="#">ボランティア募集</a></li>
+        </ul>
+    </nav>
+
+    <div class="content-wrapper">
+        <div class="main-container">
+            <div class="header-message">
+                <h1>保護者の皆さまへ</h1>
+                <div class="principal-message">
+                    <p>こんにちは、病みサースクール 塾長のタタミです。</p>
+                    <p>私たち病みサースクールは、<span class="emphasis">単なる学習塾ではありません</span>。お子さま一人ひとりのペースや状況に寄り添い、年齢や学年の枠にとらわれない学びを提供しています。学業面のサポートだけでなく、心のケアや社会復帰への支援も含めた、<span class="emphasis">総合的な成長の場</span>を目指しています。</p>
+                </div>
+            </div>
+
+            <h2>病みサースクールの特長</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>学年や年齢にとらわれない柔軟な学び</h3>
+                    <p>全日制の学校に通うことが難しい方や、過去に学びを諦めた方、再び学び直しを目指す方など、あらゆる背景を持つお子さまを対象にしています。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>個別対応の徹底</h3>
+                    <p>お子さまの目標に合わせた学習計画をオーダーメイドで作成し、一人ひとりのペースを大切にしながら学びをサポートします。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>メンタルケアと自己肯定感の育成</h3>
+                    <p>勉強に限らず、心の不安や悩みにも寄り添い、心理的なケアを重視します。学びの過程で成功体験を積み、自信を取り戻せるよう支援します。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>社会復帰や進路選択のサポート</h3>
+                    <p>お子さまが学びを通じて未来への一歩を踏み出せるよう、就職・進学のサポートも行います。学びを通じて新たな可能性を見つけるお手伝いをいたします。</p>
+                </div>
+            </div>
+
+            <div class="support-section">
+                <h2>保護者の方へのサポート</h2>
+                <p>私たちは、保護者の皆さまとも密に連携を取りながら、お子さまの成長を支えます。以下のようなサポートを提供しております：</p>
+                <div class="support-items">
+                    <div class="support-item">
+                        <h3>定期的な進捗報告とフィードバック</h3>
+                        <p>お子さまの学習状況を把握しやすいよう、定期的にレポートをお届けします。学びの進展や今後の課題についても丁寧にフィードバックします。</p>
+                    </div>
+                    <div class="support-item">
+                        <h3>保護者面談や相談の機会</h3>
+                        <p>進路に関するご相談や家庭での学習サポートについて、一緒に考えさせていただきます。保護者の皆さまの不安や質問にもお答えします。</p>
+                    </div>
+                    <div class="support-item">
+                        <h3>オンデマンド形式の情報提供</h3>
+                        <p>お忙しい保護者の方にも配慮し、オンライン動画や資料を活用した情報提供を行います。ご都合の良い時間にアクセスいただけます。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="final-message">
+                <h2>「学びに遅すぎることはありません。」</h2>
+                <p>どんな背景を持つお子さまにも、成長し、未来に向けて一歩を踏み出す力があります。私たち病みサースクールは、その一歩を支える伴走者でありたいと考えています。</p>
+                <p>学びはもちろん、心の支えとなる場所として、お子さまの成長を共に喜び合えるよう全力でサポートしてまいります。</p>
+                <p>どんな些細なことでも構いません。ご不安な点や質問があれば、どうぞ遠慮なくご相談ください。私たちが保護者の皆さまと共にお子さまの未来を支えていきます。</p>
+                <a href="#" class="contact-button">無料相談のお申し込み</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
