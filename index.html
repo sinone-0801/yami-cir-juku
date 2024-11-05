@@ -142,17 +142,124 @@
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
+        /* 説明セクションの改善されたスタイル */
         .description {
-            margin-bottom: 2em;
+            margin-bottom: 3em;
+            padding: 2em;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,255,240,0.9));
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,168,107,0.1);
         }
+
         .description h2 {
             color: var(--primary-color);
-            border-bottom: 2px solid var(--accent-color);
+            border-bottom: none;
+            position: relative;
+            padding-bottom: 0.8em;
+            margin-bottom: 1.5em;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .description h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .description-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2em;
+            margin-top: 2em;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5em;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.2em;
+            border-bottom: 2px solid var(--secondary-color);
             padding-bottom: 0.5em;
         }
-        .description h3 {
-            color: var(--secondary-color);
+
+        /* おすすめ記事セクションの改善されたスタイル */
+        .news-feed {
+            background: white;
+            padding: 2em;
+            margin-top: 3em;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
+
+        .news-feed h2 {
+            color: var(--primary-color);
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.8em;
+            margin-bottom: 1.5em;
+        }
+
+        .news-feed h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5em;
+        }
+
+        .article-card {
+            background: linear-gradient(135deg, #f0fff0, #e6ffe6);
+            padding: 1.5em;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-card a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+        }
+
+        .article-card p {
+            margin-top: 1em;
+            font-size: 0.9em;
+            color: #666;
+        }
+
         .content-area {
             display: flex;
             flex-wrap: wrap;
@@ -263,6 +370,14 @@
                 position: static;
             }
         }
+        @media (max-width: 768px) {
+            .description-grid {
+                grid-template-columns: 1fr;
+            }
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -283,16 +398,48 @@
             <div class="catchphrase">病みサースクールは、生徒の<span style="color: var(--accent-color);">居場所作り</span>と、<span style="color: var(--accent-color);">成長</span>を支援します！</div>
             <div class="description">
                 <h2>病みサースクールとは</h2>
-                <p>病みサースクールは、<strong>様々な理由で全日制の学校に通えない生徒たち</strong>のための学習支援サービスです。</p>
-                <ul>
-                    <li><strong>個別指導</strong>で一人ひとりのペースに合わせた学習</li>
-                    <li><strong>メンタルケア</strong>と学習支援の両立</li>
-                    <!-- <li><strong>資格取得サポート</strong></li> -->
-                </ul>
-                <h3>入塾と受講の流れ</h3>
-                <p>1. <strong>無料相談</strong> → 2. 体験授業 → 3. 入塾手続き → 4. <strong>個別学習プラン作成</strong> → 5. 利用開始</p>
-                <h3>病みサースクール トピックス</h3>
+                <p>病みサースクールは、<strong>様々な理由で全日制の学校に通えない生徒たち</strong>のための学習支援サービスです。
+                心の健康と学びの両立を目指し、一人ひとりに寄り添った支援を提供しています。</p>
+                
+                <div class="description-grid">
+                    <div class="feature-card">
+                        <h4>個別に合わせた学習支援</h4>
+                        <ul>
+                            <li>生徒一人ひとりのペースに合わせた学習計画</li>
+                            <li>オンラインでの双方向型授業</li>
+                            <li>定期的な学習進捗の確認と調整</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>メンタルケアの充実</h4>
+                        <ul>
+                            <li>生徒の心により沿える講師陣</li>
+                            <li>ストレスフリーな学習環境の提供</li>
+                            <li>生徒同士の交流機会の創出</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>柔軟な学習スタイル</h4>
+                        <ul>
+                            <li>時間や場所を選ばない学習システム</li>
+                            <li>体調に合わせた受講調整が可能</li>
+                            <li>録画授業の活用でいつでも復習可能</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>充実のサポート体制</h4>
+                        <ul>
+                            <li>柔軟な質問対応システム</li>
+                            <li>生徒の希望に応じた面談の実施</li>
+                            <li>進路相談・キャリア支援</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+
             <div class="content-area">
                 <div class="main-content">
                     <a href="https://www.youtube.com/channel/UCTgCO_hGCy6yjTw0YvohU-w">
@@ -307,11 +454,25 @@
             </div>
             <div class="news-feed">
                 <h2>おすすめ記事</h2>
-                <ul>
-                    <li><a href="https://note.com/tatami09430211/n/n4981de198dc8">「否定されるのはこわいものだが、それを乗り切るための考え方。」</a></li>
-                    <li><a href="https://note.com/tatami09430211/n/nd3ff23ac4e98">「自己肯定感を高めたい人が知ってほしいこと」</a></li>
-                    <li><a href="https://note.com/tatami09430211/n/n0f16d14b23a3">「完璧主義からの解放」</a></li>
-                </ul>
+                <div class="article-grid">
+                    <div class="article-card">
+                        <a href="https://note.com/tatami09430211/n/n4981de198dc8">
+                            否定されるのはこわいものだが、それを乗り切るための考え方。
+                        </a>
+                    </div>
+                    
+                    <div class="article-card">
+                        <a href="https://note.com/tatami09430211/n/nd3ff23ac4e98">
+                            自己肯定感を高めたい人が知ってほしいこと
+                        </a>
+                    </div>
+                    
+                    <div class="article-card">
+                        <a href="https://note.com/tatami09430211/n/n0f16d14b23a3">
+                            完璧主義からの解放
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="side-nav">
