@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>講師ボランティア募集 - 病みサースクール</title>
+    <style>
+        :root {
+            --primary-color: #00a86b;
+            --secondary-color: #7cfc00;
+            --accent-color: #ff1493;
+            --background-color: #f0fff0;
+            --text-color: #006400;
+            --light-text-color: #ffffff;
+            --card-background: rgba(255, 255, 255, 0.9);
+            --gradient-primary: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            --gradient-light: linear-gradient(135deg, #e6ffe6, #ccffcc);
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --transition-base: all 0.3s ease;
+        }
+
+        body, html {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        /* ナビゲーション */
+        .global-nav {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text-color);
+            padding: 1em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .global-nav-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-item {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 0.5em 1em;
+            display: inline-block;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul li a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        nav ul li a:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* メインコンテンツ */
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px 50px;
+        }
+
+        /* ヘッダーセクション */
+        .recruitment-header {
+            background: var(--gradient-light);
+            padding: 4em 2em;
+            border-radius: 15px;
+            margin-bottom: 2em;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recruitment-header h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .recruitment-header::after {
+            content: '★';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 100px;
+            color: rgba(255,255,255,0.2);
+            transform: rotate(30deg);
+        }
+
+        /* メッセージカード */
+        .message-card {
+            background: var(--card-background);
+            padding: 2.5em;
+            border-radius: 15px;
+            margin-bottom: 2em;
+            box-shadow: var(--box-shadow);
+            line-height: 1.8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient-primary);
+        }
+
+        /* 募集要項グリッド */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2em;
+            margin: 2em 0;
+        }
+
+        .requirement-card {
+            background: var(--card-background);
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .requirement-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .requirement-card h3 {
+            color: var(--primary-color);
+            margin: 0 0 1em;
+            padding-bottom: 0.5em;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* 特長リスト */
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefit-item {
+            background: var(--gradient-light);
+            padding: 1.5em 1.5em 1.5em 3em;
+            margin: 1em 0;
+            border-radius: 10px;
+            position: relative;
+            transition: var(--transition-base);
+        }
+
+        .benefit-item:hover {
+            transform: translateX(10px);
+        }
+
+        .benefit-item::before {
+            content: '★';
+            position: absolute;
+            left: 1em;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* 応募ステップ */
+        .apply-steps {
+            background: var(--card-background);
+            padding: 2em;
+            border-radius: 15px;
+            margin: 2em 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .step-card {
+            background: var(--gradient-light);
+            padding: 1.5em;
+            margin: 1em 0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 1.5em;
+            transition: var(--transition-base);
+        }
+
+        .step-card:hover {
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: var(--light-text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 1.2em;
+        }
+
+        /* 最終メッセージ */
+        .final-message {
+            text-align: center;
+            background: var(--gradient-primary);
+            color: var(--light-text-color);
+            padding: 3em 2em;
+            border-radius: 15px;
+            margin-top: 3em;
+            box-shadow: var(--box-shadow);
+        }
+
+        .final-message h2 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+
+        /* ボタン */
+        .contact-button {
+            display: inline-block;
+            padding: 1em 2em;
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1.5em;
+            transition: var(--transition-base);
+            font-weight: bold;
+        }
+
+        .contact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* テキスト装飾 */
+        .emphasis {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* セクションタイトル */
+        h2 {
+            color: var(--primary-color);
+            margin: 1.5em 0 1em;
+            position: relative;
+            padding-left: 1em;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 1em;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .recruitment-header {
+                padding: 2em 1em;
+            }
+
+            .recruitment-header h1 {
+                font-size: 2em;
+            }
+
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .message-card, .requirement-card, .apply-steps {
+                padding: 1.5em;
+            }
+
+            .benefit-item {
+                padding: 1.2em 1.2em 1.2em 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="global-nav">
+        <ul class="global-nav-list">
+            <li class="nav-item"><a href="index.html" class="nav-link">病みサースクール</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">合格実績</a></li>
+            <li class="nav-item"><a href="hogosyanokatahe.html" class="nav-link">保護者の方へ</a></li>
+            <li class="nav-item"><a href="volunteer.html" class="nav-link">ボランティア募集</a></li>
+        </ul>
+    </nav>
+
+    <div class="content-wrapper">
+        <div class="recruitment-header">
+            <h1>講師ボランティア募集</h1>
+            <p class="emphasis">生徒たちの学びと成長を、共に支えていく仲間を募集しています</p>
+        </div>
+
+        <div class="message-card">
+            <h2>病みサースクールからのメッセージ</h2>
+            <p>こんにちは、病みサースクール 塾長のタタミです。</p>
+            <p>私たち病みサースクールでは、<span class="emphasis">年齢や学年にとらわれず、学びたい気持ちを大切にする学びの場</span>を提供しています。勉強に不安がある生徒、全日制の学校に通うことが難しい生徒、再び学び直しを目指す大人の方など、さまざまな背景を持つ生徒たちが集まる場所です。</p>
+            <p>このたび、私たちと一緒に生徒たちを支える<span class="emphasis">講師ボランティア</span>を募集いたします。学びの楽しさや達成感を伝え、寄り添ってくれる方をお待ちしています。</p>
+        </div>
+
+        <h2>募集概要</h2>
+        <div class="requirements-grid">
+            <div class="requirement-card">
+                <h3>募集職種</h3>
+                <p>講師ボランティア</p>
+            </div>
+            <div class="requirement-card">
+                <h3>活動時間</h3>
+                <p>・週に数時間から可能です</p>
+                <p>・スケジュールは柔軟に調整可能</p>
+                <p>・ご希望の時間や曜日についてはご相談ください</p>
+            </div>
+        </div>
+
+        <h2>活動内容</h2>
+        <div class="benefit-list">
+            <div class="benefit-item">生徒一人ひとりの学びをサポートし、疑問や不安に寄り添います</div>
+            <div class="benefit-item">学校の授業内容の補完指導やテスト対策、進路相談のサポートを行います</div>
+            <div class="benefit-item">小学校から高校範囲までの学習指導を、オンラインまたは対面で実施します</div>
+            <div class="benefit-item">生徒の目標達成や自己成長を応援し、学習意欲を引き出します</div>
+        </div>
+
+        <h2>求める人物像</h2>
+        <div class="benefit-list">
+            <div class="benefit-item">教育や学びに情熱を持ち、やる気のある方</div>
+            <div class="benefit-item">不登校や学び直しの生徒に理解を持ち、柔軟に対応できる方</div>
+            <div class="benefit-item">生徒一人ひとりに寄り添い、話をよく聞き、サポートを続けられる方</div>
+            <div class="benefit-item">学習指導に自信があり、教えることが好きな方</div>
+        </div>
+
+        <h2>活動の魅力</h2>
+        <div class="requirements-grid">
+            <div class="requirement-card">
+                <h3>生徒の成長を共有</h3>
+                <p>多様な背景を持つ生徒たちが、学びを通じて成長していく姿に寄り添えます。小さな成長も大きな一歩として共に喜べる、やりがいある環境です。</p>
+            </div>
+            <div class="requirement-card">
+                <h3>教育スキルの向上</h3>
+                <p>生徒のサポートを通じて、指導力やコミュニケーションスキルを磨くことができます。教育やカウンセリングに興味がある方にも最適です。</p>
+            </div>
+            <div class="requirement-card">
+                <h3>生徒の成長を共有</h3>
+                <p>多様な背景を持つ生徒たちが、学びを通じて成長していく姿に寄り添えます。小さな成長も大きな一歩として共に喜べる、やりがいある環境です。</p>
+            </div>
+            <div class="requirement-card">
+                <h3>教育スキルの向上</h3>
+                <p>生徒のサポートを通じて、指導力やコミュニケーションスキルを磨くことができます。教育やカウンセリングに興味がある方にも最適です。</p>
+            </div>
+            <div class="requirement-card">
+                <h3>柔軟な活動スタイル</h3>
+                <p>オンライン指導が可能なので、自宅から気軽に活動できる環境が整っています。忙しい中でも教育活動に関わりたい方にぴったりです。</p>
+            </div>
+        </div>
+
+        <div class="apply-steps">
+            <h2>応募方法</h2>
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div>
+                    <h3>応募する</h3>
+                    <p>メールまたはお問い合わせフォームからご連絡ください。</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div>
+                    <h3>面談</h3>
+                    <p>ご応募いただいた方には、追って面談や活動の詳細についてご案内いたします。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="final-message">
+            <h2>共に成長する未来へ</h2>
+            <p>病みサースクールでは、学びたい気持ちを応援する環境を作り上げるために、講師の皆さんの力が欠かせません。生徒一人ひとりの可能性を信じ、寄り添っていただける方からのご応募をお待ちしています。</p>
+            <a href="#" class="contact-button">応募する</a>
+        </div>
+    </div>
+</body>
+</html>
