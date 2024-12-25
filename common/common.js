@@ -1,29 +1,73 @@
+// common.js
 document.addEventListener('DOMContentLoaded', async function() {
-    // スタイルの読み込み
-    try {
-        const styleResponse = await fetch('common/styles.html');
-        if (styleResponse.ok) {
-            const styleContent = await styleResponse.text();
-            // スタイルタグを作成して挿入
-            const styleElement = document.createElement('div');
-            styleElement.innerHTML = styleContent;
-            document.head.appendChild(styleElement.querySelector('style'));
+    // 共通要素を読み込む関数
+    async function loadCommonElement(url, placeholderId) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const content = await response.text();
+            const placeholder = document.getElementById(placeholderId);
+            if (placeholder) {
+                placeholder.innerHTML = content;
+            } else {
+                console.warn(`Placeholder element '${placeholderId}' not found`);
+            }
+        } catch (error) {
+            console.error(`Error loading ${url}:`, error);
         }
-    } catch (error) {
-        console.error('Error loading styles:', error);
     }
 
-    // ヘッダーの読み込み
-    try {
-        const headerResponse = await fetch('common/header.html');
-        if (headerResponse.ok) {
-            const headerContent = await headerResponse.text();
-            const headerPlaceholder = document.getElementById('header-placeholder');
-            if (headerPlaceholder) {
-                headerPlaceholder.innerHTML = headerContent;
+    // スタイルを読み込む関数
+    async function loadCommonStyles(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+            const content = await response.text();
+            
+            // スタイル内容を抽出する正規表現
+            const styleMatch = content.match(/<style>([\s\S]*?)<\/style>/);
+            
+            if (styleMatch && styleMatch[1]) {
+                // 新しいstyleタグを作成
+                const styleElement = document.createElement('style');
+                styleElement.textContent = styleMatch[1];
+                
+                // headタグの最後に追加
+                document.head.appendChild(styleElement);
+            } else {
+                console.warn('No style content found in the file');
+            }
+        } catch (error) {
+            console.error('Error loading styles:', error);
         }
-    } catch (error) {
-        console.error('Error loading header:', error);
     }
+
+    // 並行して共通要素を読み込む
+    await Promise.all([
+        loadCommonStyles('common/styles.html'),
+        loadCommonElement('common/header.html', 'header-placeholder'),
+    ]).catch(error => {
+        console.error('Error loading common elements:', error);
+    });
+
+    // 現在のページのナビゲーションリンクをアクティブにする
+    function setActiveNavLink() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+                link.classList.add('active');
+                link.style.color = 'var(--accent-color)';
+            }
+        });
+    }
+
+    // ナビゲーションの読み込み完了後にアクティブリンクを設定
+    setTimeout(setActiveNavLink, 100);
 });
