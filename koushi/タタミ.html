@@ -11,12 +11,14 @@
             --accent-color: #ff1493;
             --background-color: #f0fff0;
             --text-color: #006400;
+            --container-padding: clamp(1rem, 5vw, 2rem);
+            --content-max-width: 800px;
         }
 
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: var(--container-padding);
             background-color: transparent;
             color: var(--text-color);
             line-height: 1.8;
@@ -24,57 +26,73 @@
 
         .teacher-profile {
             background: white;
-            padding: 2em;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            max-width: 800px;
+            padding: 0;
+            border-radius: 0;
+            border: none;
+            box-shadow: none;
+            max-width: var(--content-max-width);
             margin: 0 auto;
+            width: 100%;
         }
 
         .profile-header {
             display: flex;
-            gap: 2em;
+            gap: clamp(1rem, 3vw, 2em);
             margin-bottom: 2em;
-            align-items: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .profile-image {
-            width: 200px;
-            height: 200px;
+            width: clamp(150px, 30vw, 200px);
+            height: clamp(150px, 30vw, 200px);
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--primary-color);
             flex-shrink: 0;
         }
 
+        .profile-info {
+            flex: 1;
+            min-width: 280px;
+        }
+
         .profile-info h1 {
             color: var(--primary-color);
             margin: 0 0 0.5em;
-            font-size: 2em;
+            font-size: clamp(1.5em, 5vw, 2em);
+            line-height: 1.2;
         }
 
         .profile-info .role {
             color: var(--accent-color);
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: clamp(1em, 4vw, 1.2em);
             margin-bottom: 1em;
+            line-height: 1.4;
         }
 
         .basic-info {
             display: grid;
             grid-template-columns: auto 1fr;
-            gap: 1em;
+            gap: 1em 2em;
             margin-top: 1em;
+            align-items: baseline;
         }
 
         .basic-info dt {
             font-weight: bold;
             color: var(--primary-color);
+            white-space: nowrap;
+        }
+
+        .basic-info dd {
+            margin: 0;
         }
 
         .section {
             margin: 2em 0;
-            padding: 1.5em;
+            padding: clamp(1rem, 5vw, 1.5em);
             background: linear-gradient(135deg, #f0fff0, #ffffff);
             border-radius: 8px;
         }
@@ -84,11 +102,12 @@
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 0.5em;
             margin-top: 0;
+            font-size: clamp(1.2em, 4vw, 1.5em);
         }
 
         .subjects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
             gap: 1em;
             margin: 1em 0;
         }
@@ -103,7 +122,7 @@
         .subject-category h3 {
             color: var(--accent-color);
             margin: 0 0 0.5em;
-            font-size: 1.1em;
+            font-size: clamp(1em, 3vw, 1.1em);
         }
 
         .tag-list {
@@ -117,13 +136,19 @@
             background: var(--background-color);
             padding: 0.3em 1em;
             border-radius: 15px;
-            font-size: 0.9em;
+            font-size: clamp(0.8em, 2.5vw, 0.9em);
             color: var(--primary-color);
+            white-space: nowrap;
         }
 
         .pr-text {
             line-height: 1.8;
             text-align: justify;
+            font-size: clamp(0.9em, 2.5vw, 1em);
+        }
+
+        .pr-text p {
+            margin: 1em 0;
         }
 
         .note-link {
@@ -135,6 +160,7 @@
             border-radius: 20px;
             margin-top: 1em;
             transition: all 0.3s ease;
+            font-size: clamp(0.9em, 2.5vw, 1em);
         }
 
         .note-link:hover {
@@ -147,23 +173,41 @@
             font-style: italic;
             color: var(--accent-color);
             margin-top: 2em;
-            padding: 1em;
+            padding: clamp(0.8em, 3vw, 1em);
             background: linear-gradient(135deg, #fff, #f0fff0);
             border-radius: 8px;
+            font-size: clamp(0.9em, 2.5vw, 1em);
         }
 
         @media (max-width: 600px) {
             .profile-header {
-                flex-direction: column;
+                justify-content: center;
                 text-align: center;
             }
-            
-            .basic-info {
-                grid-template-columns: 1fr;
+
+            .profile-info {
+                width: 100%;
             }
 
-            .profile-image {
-                margin: 0 auto;
+            .basic-info {
+                justify-content: center;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .basic-info {
+                grid-template-columns: 1fr;
+                gap: 0.5em;
+                text-align: center;
+            }
+
+            .basic-info dt {
+                margin-top: 1em;
+            }
+
+            .tag-list {
+                justify-content: center;
             }
         }
     </style>

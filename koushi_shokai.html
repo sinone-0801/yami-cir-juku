@@ -25,34 +25,44 @@
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* メインコンテンツレイアウト */
+        /* メインコンテンツのレイアウト */
         .content-wrapper {
-            padding-top: 80px;
-            max-width: 1200px;
-            margin: 0 auto;
+            flex: 1;
             display: flex;
+            flex-direction: row;
             gap: 2em;
             padding: 80px 1em 2em;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+            min-height: calc(100vh - 80px); /* ヘッダーの高さを考慮 */
         }
 
         /* メインコンテナ（iframe用） */
         .main-container {
             flex: 3;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 1);
             box-shadow: 0 0 20px rgba(0,168,107,0.2);
             border-radius: 10px;
             padding: 1em;
-            height: calc(100vh - 100px);
             position: relative;
+            height: calc(100vh - 100px); /* ビューポート高さから余白を引いた値 */
+            min-height: 500px; /* 最小高さを設定 */
+            display: flex;
+            flex-direction: column;
         }
 
         .teacher-frame {
             width: 100%;
-            height: 100%;
+            flex: 1;
             border: none;
             border-radius: 10px;
+            min-height: 0; /* Flexboxでの伸縮を可能にする */
         }
 
         /* サイドナビゲーション */
@@ -62,9 +72,9 @@
             padding: 2em;
             box-shadow: -2px 0 10px rgba(0,0,0,0.1);
             border-radius: 10px;
-            height: fit-content;
             position: sticky;
             top: 80px;
+            height: fit-content;
             max-height: calc(100vh - 100px);
             overflow-y: auto;
         }
@@ -79,57 +89,11 @@
         .teacher-nav {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .teacher-nav li {
             margin: 0.5em 0;
-        }
-
-        .teacher-nav a {
-            display: block;
-            padding: 0.5em 1em;
-            color: var(--text-color);
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .teacher-nav a:hover {
-            background: rgba(255, 255, 255, 0.5);
-            color: var(--accent-color);
-            transform: translateX(5px);
-        }
-
-        .contact-buttons {
-            margin-top: 2em;
-        }
-
-        .contact-buttons button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .contact-buttons button:first-child {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: var(--light-text-color);
-        }
-
-        .contact-buttons button:last-child {
-            background: linear-gradient(45deg, var(--accent-color), #ff69b4);
-            color: var(--light-text-color);
-        }
-
-        .contact-buttons button:hover {
-            opacity: 0.9;
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .teacher-link {
@@ -160,21 +124,98 @@
             color: var(--accent-color);
         }
 
-        /* iframeのローディング表示 */
-        .teacher-frame {
-            transition: opacity 0.3s ease;
+        .contact-buttons {
+            margin-top: 2em;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
         }
-        
+
+        .contact-buttons a {
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .contact-buttons button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--light-text-color);
+        }
+
+        .contact-buttons button:first-child {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .contact-buttons button:last-child {
+            background: linear-gradient(45deg, var(--accent-color), #ff69b4);
+        }
+
+        .contact-buttons button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* モバイル対応のスタイル */
         @media (max-width: 768px) {
             .content-wrapper {
                 flex-direction: column;
+                padding-top: 60px;
+                gap: 1em;
+                height: auto;
+                min-height: 100vh;
             }
+
+            .main-container {
+                order: 1;
+                height: calc(100vh - 120px); /* モバイルでの表示高さを調整 */
+                min-height: 400px;
+            }
+
+            .teacher-frame {
+                height: 100%;
+                min-height: 0;
+            }
+
             .side-nav {
+                order: 2;
                 position: static;
                 max-height: none;
+                margin-bottom: 2em;
             }
-            .main-container {
-                height: 500px;
+
+            .contact-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .contact-buttons a {
+                flex: 1;
+                min-width: 200px;
+            }
+        }
+
+        /* 小さい画面でのさらなる調整 */
+        @media (max-width: 480px) {
+            .content-wrapper {
+                padding: 60px 0.5em 1em;
+            }
+
+            .main-container, .side-nav {
+                padding: 0.8em;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .teacher-link.active::before {
+                left: -15px;
             }
         }
     </style>
@@ -196,8 +237,12 @@
             </ul>
             
             <div class="contact-buttons">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScVuPiayph1ZV7QgoNgYj8HhwosIIs3SvZ8mfDcEgCPWMlegQ/viewform?usp=sf_link"><button>問い合わせ</button></a>
-                <a href="https://discord.gg/Aj6Qq8bA9a"><button>講師募集</button></a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScVuPiayph1ZV7QgoNgYj8HhwosIIs3SvZ8mfDcEgCPWMlegQ/viewform?usp=sf_link">
+                    <button>問い合わせ</button>
+                </a>
+                <a href="https://discord.gg/Aj6Qq8bA9a">
+                    <button>講師募集</button>
+                </a>
             </div>
         </div>
     </div>
@@ -207,36 +252,31 @@
         window.addEventListener('message', function(e) {
             const iframe = document.getElementById('teacherFrame');
             if (iframe) {
-                iframe.style.height = e.data + 'px';
+                iframe.style.height = Math.max(400, e.data) + 'px';
             }
         });
 
-        // サイドナビゲーションのクリックイベント処理
+        // サイドナビゲーションの処理
         document.addEventListener('DOMContentLoaded', function() {
-            // すべての講師リンクを取得
             const teacherLinks = document.querySelectorAll('.teacher-link');
             const iframe = document.getElementById('teacherFrame');
 
-            // 各リンクにクリックイベントリスナーを追加
             teacherLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault(); // デフォルトの動作を防止
-
-                    // 現在のアクティブなリンクのスタイルを解除
+                    e.preventDefault();
                     teacherLinks.forEach(l => l.classList.remove('active'));
-                    
-                    // クリックされたリンクをアクティブに
                     this.classList.add('active');
-
-                    // iframeのソースを更新
                     iframe.src = this.href;
-
-                    // URLのハッシュを更新（任意）
                     window.location.hash = this.dataset.teacher;
+
+                    // モバイル表示時は自動スクロール
+                    if (window.innerWidth <= 768) {
+                        iframe.scrollIntoView({ behavior: 'smooth' });
+                    }
                 });
             });
 
-            // URLのハッシュに基づいて初期表示を設定
+            // URLハッシュに基づく初期表示設定
             const hash = window.location.hash.slice(1);
             if (hash) {
                 const targetLink = document.querySelector(`[data-teacher="${hash}"]`);
@@ -245,7 +285,6 @@
                     targetLink.classList.add('active');
                 }
             } else {
-                // デフォルトで最初の講師を表示
                 teacherLinks[0].classList.add('active');
             }
         });

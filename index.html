@@ -16,6 +16,7 @@
             --text-color: #006400;
             --light-text-color: #ffffff;
         }
+        
         body, html {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
@@ -34,6 +35,7 @@
             gap: 2em;
             padding-bottom: 2em;
         }
+
         .main-container {
             flex: 3;
             background-color: rgba(255, 255, 255, 0.8);
@@ -42,6 +44,7 @@
             padding: 2em;
             height: fit-content;
         }
+
         .side-nav {
             flex: 1;
             background: linear-gradient(135deg, #e6ffe6, #ccffcc);
@@ -52,6 +55,7 @@
             position: sticky;
             top: 80px;
         }
+
         .main-image {
             width: 100%;
             margin-bottom: 2em;
@@ -61,48 +65,48 @@
             border-radius: 10px;
             overflow: hidden;
         }
+
         .main-image.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         .main-image img {
             width: 100%;
             height: auto;
             display: block;
             transition: transform 0.3s ease;
         }
+
         .main-image:hover img {
             transform: scale(1.05);
         }
+
         .catchphrase {
             width: 100%;
             text-align: center;
             font-size: 2em;
-            margin-bottom: 1em;
+            margin-bottom: 1.5em;
             color: var(--primary-color);
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-        /* 説明セクションの改善されたスタイル */
-        .description {
+
+        /* メインセクションの改善されたスタイル */
+        .section-content {
             margin-bottom: 3em;
-            padding: 2em;
-            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,255,240,0.9));
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,168,107,0.1);
         }
 
-        .description h2 {
+        .section-content h2 {
             color: var(--primary-color);
-            border-bottom: none;
+            text-align: center;
             position: relative;
             padding-bottom: 0.8em;
             margin-bottom: 1.5em;
             font-size: 1.8em;
-            text-align: center;
         }
 
-        .description h2:after {
+        .section-content h2:after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -114,7 +118,7 @@
             border-radius: 2px;
         }
 
-        .description-grid {
+        .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2em;
@@ -141,46 +145,19 @@
             padding-bottom: 0.5em;
         }
 
-        /* おすすめ記事セクションの改善されたスタイル */
-        .news-feed {
-            background: white;
-            padding: 2em;
-            margin-top: 3em;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .news-feed h2 {
-            color: var(--primary-color);
-            text-align: center;
-            position: relative;
-            padding-bottom: 0.8em;
-            margin-bottom: 1.5em;
-        }
-
-        .news-feed h2:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            border-radius: 2px;
-        }
-
+        /* おすすめ記事セクションのスタイル */
         .article-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5em;
+            margin-top: 2em;
         }
 
         .article-card {
-            background: linear-gradient(135deg, #f0fff0, #e6ffe6);
+            background: white;
             padding: 1.5em;
             border-radius: 10px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
 
@@ -195,22 +172,74 @@
             display: block;
         }
 
-        .article-card p {
-            margin-top: 1em;
-            font-size: 0.9em;
-            color: #666;
+        .side-nav ul {
+            list-style-type: none;
+            padding: 0;
         }
 
+        .side-nav ul li {
+            margin-bottom: 0.8em;
+        }
+
+        .side-nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .side-nav ul li a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+            display: inline-block;
+        }
+
+        .contact-buttons {
+            margin-top: 2em;
+        }
+
+        .contact-buttons button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-buttons button:first-child {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text-color);
+        }
+
+        .contact-buttons button:last-child {
+            background: linear-gradient(45deg, var(--accent-color), #ff69b4);
+            color: var(--light-text-color);
+        }
+
+        .contact-buttons button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* コンテンツエリア用の追加スタイル */
         .content-area {
             display: flex;
             flex-wrap: wrap;
+            margin: 2em 0;
         }
+
         .main-content {
             flex: 1;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1em;
         }
+
         .main-content a {
             background: linear-gradient(45deg, #f0fff0, #e6ffe6);
             height: 150px;
@@ -223,80 +252,28 @@
             transition: all 0.3s ease;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 1em;
         }
+
         .main-content a:hover {
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: var(--light-text-color);
             transform: translateY(-5px) rotate(2deg);
         }
+
         .main-content img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
             transition: transform 0.3s ease;
         }
+
         .main-content a:hover img {
             transform: scale(1.1) rotate(-5deg);
         }
-        .news-feed {
-            width: 95%;
-            background: linear-gradient(135deg, #f0fff0, #e6ffe6);
-            padding: 1em;
-            margin-top: 2em;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .news-feed h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5em;
-        }
-        .side-nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .side-nav ul li {
-            margin-bottom: 0.8em;
-        }
-        .side-nav ul li a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        .side-nav ul li a:hover {
-            color: var(--accent-color);
-            transform: translateX(5px);
-            display: inline-block;
-        }
-        .contact-buttons {
-            margin-top: 2em;
-        }
-        .contact-buttons button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .contact-buttons button:first-child {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: var(--light-text-color);
-        }
-        .contact-buttons button:last-child {
-            background: linear-gradient(45deg, var(--accent-color), #ff69b4);
-            color: var(--light-text-color);
-        }
-        .contact-buttons button:hover {
-            opacity: 0.9;
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
 
+        /* レスポンシブデザイン */
         @media (max-width: 1200px) {
             .content-wrapper {
                 margin: 0 1em;
@@ -306,23 +283,70 @@
         @media (max-width: 768px) {
             .content-wrapper {
                 flex-direction: column;
+                padding-top: 20px;
             }
-            .side-nav {
-                position: static;
-            }
-        }
-        @media (max-width: 768px) {
-            .description-grid {
+
+            .main-content {
                 grid-template-columns: 1fr;
             }
+            
+            .nav-link {
+                padding: 0.3em 0.6em;
+                font-size: 0.9em;
+            }
+
+            .main-container {
+                order: 1;
+                margin-bottom: 2em;
+            }
+            
+            .side-nav {
+                order: 2;
+                position: static;
+                width: auto;
+                margin-top: 2em;
+                padding: 1.5em;
+            }
+
+            .side-nav ul {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1em;
+                text-align: center;
+            }
+
+            .contact-buttons {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1em;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .article-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .side-nav ul,
+            .contact-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .catchphrase {
+                font-size: 1.5em;
+            }
+
+            .main-container {
+                padding: 1em;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ヘッダーのプレースホルダー -->
     <div id="header-placeholder"></div>
 
     <div class="content-wrapper">
@@ -330,13 +354,17 @@
             <div class="main-image">
                 <img src="images/main.png" alt="メイン画像">
             </div>
-            <div class="catchphrase">病みサースクールは、生徒の<span style="color: var(--accent-color);">居場所作り</span>と、<span style="color: var(--accent-color);">成長</span>を支援します！</div>
-            <div class="description">
+            <div class="catchphrase">
+                病みサースクールは、生徒の<span style="color: var(--accent-color);">居場所作り</span>と、
+                <span style="color: var(--accent-color);">成長</span>を支援します！
+            </div>
+
+            <section class="section-content">
                 <h2>病みサースクールとは</h2>
                 <p>病みサースクールは、<strong>様々な理由で全日制の学校に通えない生徒たち</strong>のためのオンライン学習支援サービスです。
                 心の健康と学びの両立を目指し、一人ひとりに寄り添った支援を提供しています。</p>
                 
-                <div class="description-grid">
+                <div class="feature-grid">
                     <div class="feature-card">
                         <h4>個別に合わせた学習支援</h4>
                         <ul>
@@ -373,41 +401,46 @@
                         </ul>
                     </div>
                 </div>
-                <div class="description">
-                    <h2>Discordでのサービス提供について</h2>
-                    <p>病みサースクールでは、オンライン学習をより身近に、そして柔軟に利用していただくために、<strong>Discordプラットホーム</strong>を使用してサービスを提供しています。
-                    Discordは、リアルタイムのコミュニケーションや情報共有に優れており、生徒を講師が効率よく学習を進めるための理想的な環境です</p>
+            </section>
 
-                    <div class="description-grid">
-                        <div class="feature-card">
-                            <h4>Discordを活用した主なサービス</h4>
-                            <ul>
-                                <li><strong>リアルタイム授業</strong>: 生徒と講師がビデオ通話や音声チャットを使用して、まるで対面授業のような学びを提供します。</li>
-                                <li><strong>質問・相談チャット</strong>: 生徒がわからないことをその場で質問できるテキストチャットを設置しています。</li>
-                                <li><strong>学習サポート部屋</strong>: 他の生徒とも交流しながら、互いに刺激を受けつつ学習できるスペースがあります。</li>
-                                <li><strong>個別指導</strong>: 完全個別対応で、生徒一人ひとりの学習状況や目標に合わせた指導を行います。</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="description">
-                        <p><strong>病みサースクール</strong>は、学習を通じて生徒が自信を持ち、自己成長を感じられるようサポートします。<strong>Discord</strong>を使うことで、場所を問わずどこからでも質の高い教育を受けることができます。</p>
+            <section class="section-content">
+                <h2>Discordでのサービス提供について</h2>
+                <p>病みサースクールでは、オンライン学習をより身近に、そして柔軟に利用していただくために、<strong>Discordプラットホーム</strong>を使用してサービスを提供しています。
+                Discordは、リアルタイムのコミュニケーションや情報共有に優れており、生徒を講師が効率よく学習を進めるための理想的な環境です。</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Discordを活用した主なサービス</h4>
+                        <ul>
+                            <li><strong>リアルタイム授業</strong>: 生徒と講師がビデオ通話や音声チャットを使用して、まるで対面授業のような学びを提供します。</li>
+                            <li><strong>質問・相談チャット</strong>: 生徒がわからないことをその場で質問できるテキストチャットを設置しています。</li>
+                            <li><strong>学習サポート部屋</strong>: 他の生徒とも交流しながら、互いに刺激を受けつつ学習できるスペースがあります。</li>
+                            <li><strong>個別指導</strong>: 完全個別対応で、生徒一人ひとりの学習状況や目標に合わせた指導を行います。</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
+
+                <p><strong>病みサースクール</strong>は、学習を通じて生徒が自信を持ち、自己成長を感じられるようサポートします。<strong>Discord</strong>を使うことで、場所を問わずどこからでも質の高い教育を受けることができます。</p>
+            </section>
 
             <div class="content-area">
                 <div class="main-content">
                     <a href="https://www.youtube.com/channel/UCTgCO_hGCy6yjTw0YvohU-w">
                         <img src="images/youtube_logo.png" alt="YouTube">
                     </a>
-                    <a href="jukukouaisatsu.html">塾長挨拶</a>
+                    <a href="jukukouaisatsu.html">
+                        <img src="images/jukucho.png" alt="塾長挨拶">
+                    </a>
                     <a href="koushi_shokai.html">講師紹介</a>
-                    <a href="#">生徒の声</a>
+                    <a href="seitonokoe.html">生徒の声</a>
                     <a href="#">ギャラリー</a>
-                    <a href="https://yamiserver.com/"><img src="images/yamiserverTop.png" alt="病みサー（本家）"></a>
+                    <a href="https://yamiserver.com/">
+                        <img src="images/yamiserverTop.png" alt="病みサー（本家）">
+                    </a>
                 </div>
             </div>
-            <div class="news-feed">
+
+            <section class="section-content">
                 <h2>おすすめ記事</h2>
                 <div class="article-grid">
                     <div class="article-card">
@@ -428,7 +461,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
         <div class="side-nav">
             <h3>コース一覧</h3>
