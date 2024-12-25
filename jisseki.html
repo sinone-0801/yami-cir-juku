@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合格実績 - 病みサースクール</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #00a86b;
+            --secondary-color: #7cfc00;
+            --accent-color: #ff1493;
+            --background-color: #f0fff0;
+            --text-color: #006400;
+            --light-text-color: #ffffff;
+        }
+        
+        body, html {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+        
+        .global-nav {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text-color);
+            padding: 1em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .global-nav-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-item {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 0.5em 1em;
+            display: inline-block;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .content-wrapper {
+            padding-top: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+
+        .main-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,168,107,0.2);
+        }
+
+        .header-message {
+            text-align: center;
+            margin-bottom: 3em;
+            padding: 2em;
+            background: linear-gradient(135deg, #e6ffe6, #ccffcc);
+            border-radius: 10px;
+        }
+
+        .header-message h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .header-message p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 1em;
+        }
+
+        /* 合格実績セクションの改善されたスタイル */
+        .achievements-section {
+            margin-top: 2em;
+        }
+
+        .achievement-year {
+            background: linear-gradient(135deg, #f0fff0, #e6ffe6);
+            padding: 2em;
+            border-radius: 10px;
+            margin-bottom: 2em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .year-title {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 1.5em;
+            position: relative;
+            padding-bottom: 0.8em;
+        }
+
+        .year-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .achievement-card {
+            background: white;
+            padding: 1.5em;
+            margin-bottom: 1em;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .achievement-date {
+            color: var(--primary-color);
+            font-size: 1em;
+            margin-bottom: 0.8em;
+            font-weight: bold;
+        }
+
+        .achievement-content {
+            font-size: 1.2em;
+            margin-bottom: 0.8em;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .achievement-name {
+            text-align: right;
+            color: var(--accent-color);
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .no-data-message {
+            text-align: center;
+            padding: 3em;
+            background: linear-gradient(135deg, #f0fff0, #e6ffe6);
+            border-radius: 10px;
+            margin-top: 2em;
+        }
+
+        .no-data-message p {
+            color: var(--text-color);
+            font-size: 1.2em;
+            margin-bottom: 1em;
+        }
+
+        .emphasis {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 1em;
+            }
+            
+            .main-container {
+                padding: 1em;
+            }
+
+            .header-message {
+                padding: 1.5em;
+            }
+
+            .achievement-year {
+                padding: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="global-nav">
+        <ul class="global-nav-list">
+            <li class="nav-item"><a href="index.html" class="nav-link">病みサースクール</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">合格実績</a></li>
+            <li class="nav-item"><a href="hogosyanokatahe.html" class="nav-link">保護者の方へ</a></li>
+            <li class="nav-item"><a href="volunteer.html" class="nav-link">ボランティア募集</a></li>
+        </ul>
+    </nav>
+
+    <div class="content-wrapper">
+        <div class="main-container">
+            <div class="header-message">
+                <h1>合格実績</h1>
+                <p>病みサースクールの生徒たちが築き上げた<span class="emphasis">成功の軌跡</span>をご紹介します。</p>
+                <p>一人ひとりの<span class="emphasis">夢の実現</span>に向けた頑張りの証です。</p>
+            </div>
+            
+            <div id="achievement-list" class="achievements-section">
+                <!-- ここにJavaScriptで実績データが挿入されます -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CSVファイルを読み込んで表示する関数
+        async function loadAchievements() {
+            const achievementList = document.getElementById('achievement-list');
+            
+            try {
+                const response = await fetch('jisseki.csv');
+                if (!response.ok) {
+                    throw new Error('ファイルが見つかりません');
+                }
+                const csvText = await response.text();
+                
+                Papa.parse(csvText, {
+                    header: true,
+                    complete: function(results) {
+                        if (results.data.length === 0) {
+                            showNoDataMessage();
+                            return;
+                        }
+                        
+                        const groupedByYear = groupDataByYear(results.data);
+                        displayAchievements(groupedByYear);
+                    },
+                    error: function(error) {
+                        showNoDataMessage();
+                        console.error('Parse error:', error);
+                    }
+                });
+            } catch (error) {
+                showNoDataMessage();
+                console.error('Error loading file:', error);
+            }
+        }
+
+        // データを年度ごとにグループ化する関数
+        function groupDataByYear(data) {
+            const grouped = {};
+            data.forEach(item => {
+                const year = new Date(item.date).getFullYear();
+                if (!grouped[year]) {
+                    grouped[year] = [];
+                }
+                grouped[year].push(item);
+            });
+            
+            Object.keys(grouped).forEach(year => {
+                grouped[year].sort((a, b) => new Date(b.date) - new Date(a.date));
+            });
+            
+            return grouped;
+        }
+
+        // 実績を画面に表示する関数
+        function displayAchievements(groupedData) {
+            const achievementList = document.getElementById('achievement-list');
+            achievementList.innerHTML = '';
+            
+            Object.keys(groupedData)
+                .sort((a, b) => b - a)
+                .forEach(year => {
+                    const yearSection = document.createElement('div');
+                    yearSection.className = 'achievement-year';
+                    
+                    yearSection.innerHTML = `
+                        <h2 class="year-title">${year}年度 実績</h2>
+                    `;
+                    
+                    groupedData[year].forEach(achievement => {
+                        const achievementCard = document.createElement('div');
+                        achievementCard.className = 'achievement-card';
+                        
+                        const date = new Date(achievement.date)
+                            .toLocaleDateString('ja-JP', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        
+                        achievementCard.innerHTML = `
+                            <div class="achievement-date">${date}</div>
+                            <div class="achievement-content">${achievement.jisseki}</div>
+                            ${achievement.name ? `<div class="achievement-name">${achievement.name}</div>` : ''}
+                        `;
+                        
+                        yearSection.appendChild(achievementCard);
+                    });
+                    
+                    achievementList.appendChild(yearSection);
+                });
+        }
+
+        // データがない場合のメッセージを表示する関数
+        function showNoDataMessage() {
+            const achievementList = document.getElementById('achievement-list');
+            achievementList.innerHTML = `
+                <div class="no-data-message">
+                    <p>現在、合格実績データは準備中です。</p>
+                    <p>新しい実績は随時更新していきますので、しばらくお待ちください。</p>
+                </div>
+            `;
+        }
+
+        // ページ読み込み時に実行
+        document.addEventListener('DOMContentLoaded', loadAchievements);
+    </script>
+</body>
+</html>
