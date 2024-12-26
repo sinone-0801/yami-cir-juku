@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生徒の声 - 病みサースクール</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="common/common.js"></script>
+    <link rel="stylesheet" href="common/styles.css">
+    <style>
+        :root {
+            --primary-color: #00a86b;
+            --secondary-color: #7cfc00;
+            --accent-color: #ff1493;
+            --background-color: #f0fff0;
+            --text-color: #006400;
+            --light-text-color: #ffffff;
+        }
+        
+        body, html {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .content-wrapper {
+            padding-top: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2em;
+            padding-bottom: 2em;
+        }
+
+        .main-container {
+            flex: 3;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0,168,107,0.2);
+            border-radius: 10px;
+            padding: 2em;
+        }
+
+        .page-title {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 1.5em;
+            position: relative;
+            padding-bottom: 0.5em;
+        }
+
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .interview-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2em;
+            margin-bottom: 2em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .interview-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .student-name {
+            color: var(--primary-color);
+            font-size: 1.4em;
+            margin-bottom: 1em;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+        }
+
+        .interview-section {
+            margin-bottom: 1.5em;
+        }
+
+        .question {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        .answer {
+            padding-left: 1em;
+            border-left: 3px solid var(--secondary-color);
+            margin-bottom: 1em;
+        }
+
+        .side-nav {
+            flex: 1;
+            background: linear-gradient(135deg, #e6ffe6, #ccffcc);
+            padding: 2em;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            height: fit-content;
+            position: sticky;
+            top: 80px;
+        }
+
+        .side-nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .side-nav ul li {
+            margin-bottom: 0.8em;
+        }
+
+        .side-nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .contact-buttons {
+            margin-top: 2em;
+        }
+
+        .contact-buttons button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text-color);
+        }
+
+        .contact-buttons button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-bottom: 20px;
+            }
+
+            .side-nav {
+                position: static;
+                order: 2;
+            }
+
+            .main-container {
+                order: 1;
+            }
+
+            .interview-card {
+                padding: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <div class="content-wrapper">
+        <div class="main-container">
+            <h1 class="page-title">生徒の声</h1>
+            
+            <div class="interview-card">
+                <h2 class="student-name">久住。さん（2024年度大学受験合格者）</h2>
+                
+                <div class="interview-section">
+                    <p class="question">どんな目標を持って勉強していたか</p>
+                    <p class="answer">自分は養護教諭になりたいと思って勉強しています。</p>
+                </div>
+                
+                <div class="interview-section">
+                    <p class="question">苦労した点と、それを上手くやりきった方法</p>
+                    <p class="answer">やる気が出ない、文字が頭に入ってこないという課題がありました。しかし、自分は気になったことはとことん調べたいタイプなので、受験の小論文でそういう面では苦労しませんでした。逆に今は入学前課題の読書感想文がうまく進まず、どこでなら落ち着いて本が読めるか考えています。</p>
+                </div>
+                
+                <div class="interview-section">
+                    <p class="question">受験をする上での病みサースクールの使い方</p>
+                    <p class="answer">自分はまとめで使わせていただいてました。チャットだと書いたものがぱっと見れて探しやすいのでとても助かりました。</p>
+                </div>
+                
+                <div class="interview-section">
+                    <p class="question">病みサースクールのいいところ</p>
+                    <p class="answer">同じ勉強を頑張ろうとしている人がいるところです。</p>
+                </div>
+                
+                <div class="interview-section">
+                    <p class="question">次の受験生や病みサースクール利用者に一言</p>
+                    <p class="answer">無理しない範囲でやりたいことを頑張ってください！</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-nav">
+            <h3>コース一覧</h3>
+            <ul>
+                <li><a href="gakkou.html">学校サポートコース</a></li>
+                <li><a href="koukou.html">高校入試コース</a></li>
+                <li><a href="kousotsu.html">高卒認定試験コース</a></li>
+                <li><a href="daigaku.html">大学受験コース</a></li>
+            </ul>
+            <div class="contact-buttons">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScVuPiayph1ZV7QgoNgYj8HhwosIIs3SvZ8mfDcEgCPWMlegQ/viewform?usp=sf_link"><button>問い合わせ</button></a>
+                <a href="https://discord.gg/Aj6Qq8bA9a"><button>参加はこちらから</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
