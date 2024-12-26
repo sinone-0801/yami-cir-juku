@@ -31,38 +31,43 @@ document.addEventListener('DOMContentLoaded', async function() {
     // ナビゲーション要素の初期化
     function initializeNavigation() {
         if (isInitialized) return;
-
+    
         hamburger = document.querySelector('.hamburger-menu');
         nav = document.querySelector('.global-nav-list');
         header = document.querySelector('.global-nav');
-
+    
         if (!hamburger || !nav || !header) {
             console.warn('Navigation elements not found. Retrying in 100ms...');
             return false;
         }
-
-        // ハンバーガーメニューの制御
+    
+        // ハンバーガーメニューの制御を改善
         hamburger.addEventListener('click', function() {
             hamburger.classList.toggle('active');
-            nav.classList.toggle('active');
             
-            // メニューが開いているときはスクロールを無効化
-            if (nav.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        });
-
-        // メニューリンクをクリックしたらメニューを閉じる
-        nav.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                nav.classList.remove('active');
-                document.body.style.overflow = '';
+            // アニメーションのタイミングを制御
+            requestAnimationFrame(() => {
+                nav.classList.toggle('active');
+                
+                if (nav.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                    // メニューアイテムの表示を遅延させる
+                    nav.querySelectorAll('.nav-item').forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                } else {
+                    document.body.style.overflow = '';
+                    nav.querySelectorAll('.nav-item').forEach(item => {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(-20px)';
+                    });
+                }
             });
         });
-
+    
         isInitialized = true;
         return true;
     }
