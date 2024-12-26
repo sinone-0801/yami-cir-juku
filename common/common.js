@@ -36,6 +36,22 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
 
+    const hamburger = document.querySelector('.hamburger-menu');
+    const nav = document.querySelector('.global-nav-list');
+    
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        nav.classList.toggle('active');
+    });
+
+    // メニューリンクをクリックしたらメニューを閉じる
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+        });
+    });
+    
     // ナビゲーションの読み込み完了後にアクティブリンクを設定
     setTimeout(setActiveNavLink, 100);
 });
