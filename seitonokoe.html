@@ -42,7 +42,13 @@
             box-shadow: 0 0 20px rgba(0,168,107,0.2);
             border-radius: 10px;
             padding: 2em;
+            height: fit-content;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        /* .main-container:hover {
+            box-shadow: 0 0 25px rgba(0,168,107,0.3);
+        } */
 
         .page-title {
             color: var(--primary-color);
@@ -51,6 +57,7 @@
             margin-bottom: 1.5em;
             position: relative;
             padding-bottom: 0.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .page-title:after {
@@ -71,12 +78,13 @@
             padding: 2em;
             margin-bottom: 2em;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .interview-card:hover {
+        /* .interview-card:hover {
             transform: translateY(-5px);
-        }
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        } */
 
         .student-name {
             color: var(--primary-color);
@@ -84,23 +92,40 @@
             margin-bottom: 1em;
             border-bottom: 2px solid var(--secondary-color);
             padding-bottom: 0.5em;
+            transition: color 0.3s ease;
         }
+
+        /* .interview-card:hover .student-name {
+            color: var(--accent-color);
+        } */
 
         .interview-section {
             margin-bottom: 1.5em;
+            transition: transform 0.3s ease;
         }
+
+        /* .interview-section:hover {
+            transform: translateX(5px);
+        } */
 
         .question {
             color: var(--accent-color);
             font-weight: bold;
             margin-bottom: 0.5em;
+            transition: color 0.3s ease;
         }
 
         .answer {
             padding-left: 1em;
             border-left: 3px solid var(--secondary-color);
             margin-bottom: 1em;
+            transition: border-left-color 0.3s ease, padding-left 0.3s ease;
         }
+
+        /* .interview-section:hover .answer {
+            border-left-color: var(--accent-color);
+            padding-left: 1.2em;
+        } */
 
         .side-nav {
             flex: 1;
@@ -111,6 +136,12 @@
             height: fit-content;
             position: sticky;
             top: 80px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .side-nav:hover {
+            transform: translateX(-5px);
+            box-shadow: -4px 0 15px rgba(0,0,0,0.15);
         }
 
         .side-nav ul {
@@ -127,6 +158,15 @@
             color: var(--text-color);
             font-weight: bold;
             transition: all 0.3s ease;
+            display: block;
+            padding: 0.5em;
+            border-radius: 5px;
+        }
+
+        .side-nav ul li a:hover {
+            color: var(--light-text-color);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transform: translateX(5px);
         }
 
         .contact-buttons {
@@ -136,7 +176,7 @@
         .contact-buttons button {
             display: block;
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border: none;
             border-radius: 5px;
@@ -145,32 +185,104 @@
             transition: all 0.3s ease;
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: var(--light-text-color);
+            position: relative;
+            overflow: hidden;
         }
 
         .contact-buttons button:hover {
             opacity: 0.9;
             transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .contact-buttons button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-buttons button:hover::after {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        @media (max-width: 1200px) {
+            .content-wrapper {
+                margin: 0 1.5em;
+            }
         }
 
         @media (max-width: 768px) {
             .content-wrapper {
                 flex-direction: column;
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-bottom: 20px;
-            }
-
-            .side-nav {
-                position: static;
-                order: 2;
+                padding: 60px 1em 1em;
             }
 
             .main-container {
                 order: 1;
+                padding: 1.5em;
+            }
+
+            .side-nav {
+                order: 2;
+                position: static;
+                margin-top: 1.5em;
+                padding: 1.5em;
             }
 
             .interview-card {
                 padding: 1.5em;
+            }
+
+            .page-title {
+                font-size: 1.8em;
+            }
+
+            .side-nav ul {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1em;
+            }
+
+            .contact-buttons {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-wrapper {
+                padding: 40px 0.8em 0.8em;
+            }
+
+            .main-container {
+                padding: 1.2em;
+                margin: 0;
+            }
+
+            .interview-card {
+                padding: 1.2em;
+                margin-bottom: 1.2em;
+            }
+
+            .side-nav {
+                padding: 1.2em;
+                margin: 1.2em 0;
+            }
+
+            .side-nav ul,
+            .contact-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .student-name {
+                font-size: 1.3em;
             }
         }
     </style>
